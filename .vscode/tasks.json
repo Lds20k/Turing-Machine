@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "label": "Compile and run C for gdb",
+            "type": "shell",
+            "command": "gcc",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "args": [
+                "-std=c17",
+                "-O2",
+                "-Wall",
+                "-g",
+                "${workspaceFolder}/ep01.c",
+                "-o",
+                "${workspaceFolder}/ep01.out",
+                "-O0",
+                "-fno-inline"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

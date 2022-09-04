@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "name": "C Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/ep01.out",
+            "stopAtEntry": false,
+            "externalConsole": false,
+            "launchCompleteCommand": "exec-run",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "${defaultBuildTask}",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
