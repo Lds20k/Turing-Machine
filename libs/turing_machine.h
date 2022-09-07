@@ -7,10 +7,9 @@ typedef struct TURING_MACHINE
     node_t* current_state;
 
     // Tape control
-    void* tape;
-    int64_t tape_length;
+    node_t* tape;
 } turing_machine_t;
 
-
+turing_machine_t create_machine(char* tape, node_t* initial_state);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 #include <stdint.h>
+#include <stdlib.h>
 
 typedef struct NODE node_t;
 
