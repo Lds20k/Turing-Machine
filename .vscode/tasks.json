@@ -3,23 +3,25 @@
         {
             "label": "Compile and run C for gdb",
             "type": "shell",
-            "command": "gcc",
+            "command": "g++",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"
             },
             "args": [
-                "-std=c17",
                 "-O2",
                 "-Wall",
                 "-g",
-                "${workspaceFolder}/main.c",
+                "${workspaceFolder}\\main.c",
                 "-o",
-                "${workspaceFolder}/main.out",
+                "${workspaceFolder}\\main.out",
                 "-O0",
                 "-fno-inline"
             ],
-            "group": "build"
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         },
         {
             "type": "cppbuild",
@@ -39,8 +41,7 @@
                 "$gcc"
             ],
             "group": {
-                "kind": "build",
-                "isDefault": true
+                "kind": "build"
             },
             "detail": "Tarefa gerada pelo Depurador."
         }

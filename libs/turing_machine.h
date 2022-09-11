@@ -10,6 +10,7 @@ typedef struct TURING_MACHINE
     node_t* tape;
 } turing_machine_t;
 
-turing_machine_t create_machine(char* tape, node_t* initial_state);
+turing_machine_t* create_machine(char* tape, node_t* initial_state);
+node_t* start_processing(turing_machine_t* machine);
 
 #endif

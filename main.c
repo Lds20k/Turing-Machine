@@ -25,13 +25,14 @@ int main(int argc, char const *argv[]){
     printf("Initial state: 1\n");
     printf("Final state: %d\n", num_states);
 
-
     char number_of_transitions[NUMBER_OF_TRANSITION_SIZE]; 
     fgets(number_of_transitions, NUMBER_OF_TRANSITION_SIZE, fpointer);
     int num_transitions;
     num_transitions = atoi(number_of_transitions);
     printf("Number of transitions under: %d\n", num_transitions);
 
+    // Size 11 due to maximum transitions is 50
+    // So 9 + 2 in string has 2 state positions
     char transitions[50][11];
     for(int i = 0; i < num_transitions; i++){
         char * pointer = &transitions[i][0];
