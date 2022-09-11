@@ -4,7 +4,7 @@
             "name": "C Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/ep01.out",
+            "program": "${workspaceFolder}/main.out",
             "stopAtEntry": false,
             "externalConsole": false,
             "launchCompleteCommand": "exec-run",
