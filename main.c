@@ -19,20 +19,20 @@ int main(int argc, char const *argv[]){
 
     char input_symbols[INPUT_SYMBOLS_SIZE]; 
     fgets(input_symbols, INPUT_SYMBOLS_SIZE, fpointer);
-    printf("Input symbols: %s", input_symbols);
+    // printf("Input symbols: %s", input_symbols);
 
     char number_of_states[NUMBER_OF_STATES_SIZE]; 
     fgets(number_of_states, NUMBER_OF_STATES_SIZE, fpointer);
     int num_states = atoi(number_of_states);
-    printf("Number of states: %d\n", num_states);
-    printf("Initial state: 1\n");
-    printf("Final state: %d\n", num_states);
+    // printf("Number of states: %d\n", num_states);
+    // printf("Initial state: 1\n");
+    // printf("Final state: %d\n", num_states);
 
     char number_of_transitions[NUMBER_OF_TRANSITION_SIZE]; 
     fgets(number_of_transitions, NUMBER_OF_TRANSITION_SIZE, fpointer);
     int num_transitions;
     num_transitions = atoi(number_of_transitions);
-    printf("Number of transitions under: %d\n", num_transitions);
+    // printf("Number of transitions under: %d\n", num_transitions);
     
     // Size 11 due to maximum transitions is 50
     // 2 (in string has 2 state, and this states has values above 9)
@@ -61,29 +61,40 @@ int main(int argc, char const *argv[]){
         states[state].transitions[actual_transition].direction       = (*strtok(NULL, " ") == 'D')? right : left;
         states[state].transitions[actual_transition].state           = &states[atoi(strtok(NULL, "\n")) - 1];
 
-        printf("%s", transition);
+        // printf("%s", transition);
     }
 
     char number_of_words[4]; 
     fgets(number_of_words, 4, fpointer);
     int num_words = atoi(number_of_words);
-    printf("Number of words under: %d\n", num_words);
+    // printf("Number of words under: %d\n", num_words);
 
     // ALERTA -> VERIFICAR
     char words[num_words][WORD_MAX_SIZE];
     for(int i = 0; i < num_words; i++){
         char * pointer = &words[i][0];
         fgets(pointer, WORD_MAX_SIZE, fpointer);
-        printf("%s", pointer);
+        // printf("%s", pointer);
     }
 
     fclose(fpointer);
 
     // Turing Machine Start =)
     int accepted_state_index  = num_states - 1;
-    turing_machine_t* machine = create_machine(words[0], states, &states[accepted_state_index]);
-    bool is_ok = start_processing(machine);
-    printf("%d: %s %sOK\n", 1, strtok(words[0], "\n"), is_ok? "" : 'not ');
+
+    turing_machine_t* machine = NULL;
+
+    for(int i = 0; i < num_words; i++){
+        char tape[WORD_MAX_SIZE];
+        strcpy(tape, words[i]);
+        if (machine == NULL){
+            machine = create_machine(tape, states, &states[accepted_state_index]);
+        } else {
+            change_tape(machine, tape);
+        }
+        bool is_ok = start_processing(machine); 
+        printf("%d: %s %sOK\n", i + 1, strtok(words[i], "\n"), is_ok? "" : "not ");
+    }
 
     return 0;
 }

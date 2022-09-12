@@ -44,6 +44,35 @@ node_t* move_tape_head(node_t** tape_head, direction_e direction){
     }
 }
 
+
+
+turing_machine_t* change_tape(turing_machine_t* machine, char* tape) {
+    // destruct_dl_list(machine->tape_head);
+    machine->tape_head = NULL;
+    machine->current_state = machine->initial_state;
+
+    int64_t i   = 0;
+    node_t* aux = NULL;
+    while (tape[i] != '\0' && tape[i] != '\n')
+    {
+        if(aux == NULL){
+            aux = create_dl_list(&tape[i], 1);
+            if(aux == NULL) return NULL;
+            machine->tape_head = aux;
+        }else{
+            aux = dl_list_add_node(aux, right, &tape[i], 1);
+            if(aux == NULL){
+                destruct_dl_list(machine->tape_head);
+                machine->tape_head = NULL;
+                return NULL;
+            }
+        }
+        i++;
+    }
+    machine->tape = machine->tape_head;
+    return machine;
+}
+
 void print_machine_state(const turing_machine_t* machine){
     node_t* aux = machine->tape;
     while (aux != NULL)
@@ -60,7 +89,7 @@ void print_machine_state(const turing_machine_t* machine){
 
 bool start_processing(turing_machine_t* machine){
     while(machine->current_state != machine->accepted_state){
-        print_machine_state(machine);
+        // print_machine_state(machine);
         char symbol = *((char*)machine->tape_head->content);
         transition_t* transition = get_transition(machine->current_state, symbol);
         if(transition == NULL) return false;
