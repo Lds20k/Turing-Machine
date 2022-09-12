@@ -11,6 +11,7 @@ typedef struct TURING_MACHINE
 
     // Tape control
     node_t* tape_head;
+    node_t* tape;
 } turing_machine_t;
 
 turing_machine_t* create_machine(char* tape, state_t* initial_state, state_t* accepted_state);

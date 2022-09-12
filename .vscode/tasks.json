@@ -1,7 +1,7 @@
 {
     "tasks": [
         {
-            "label": "Compile and run C for gdb",
+            "label": "Compile C for gdb",
             "type": "shell",
             "command": "gcc",
             "presentation": {
@@ -15,6 +15,8 @@
                 "${workspaceFolder}/main.c",
                 "-o",
                 "${workspaceFolder}/main.out",
+                "${workspaceFolder}/libs/graph.c",
+                "${workspaceFolder}/libs/transition.c",
                 "${workspaceFolder}/libs/turing_machine.c",
                 "-O0",
                 "-fno-inline"

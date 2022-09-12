@@ -48,20 +48,18 @@ int main(int argc, char const *argv[]){
         strcpy(buffer, transition);
 
         // proccess
-        int state = atoi(strtok(buffer, " ")) - 1;
+        uint64_t state = atoi(strtok(buffer, " ")) - 1;
 
-        states[state].transition_length++;
-        if(states[state].transition == NULL)
-            states[state].transition = malloc(sizeof(transition_t));
-        else 
-            realloc(states[state].transition, states[state].transition_length * sizeof(transition_t));
+        states[state].state_number = state;
+        states[state].transitions_length++;
+        states[state].transitions = realloc(states[state].transitions, states[state].transitions_length * sizeof(transition_t));
         
-        int64_t actual_transition = states[state].transition_length - 1;
+        int64_t actual_transition = states[state].transitions_length - 1;
         
-        states[state].transition[actual_transition].read_character  = *strtok(NULL, " ");
-        states[state].transition[actual_transition].write_character = *strtok(NULL, " ");
-        states[state].transition[actual_transition].direction       = (*strtok(NULL, " ") == 'D')? right : left;
-        states[state].transition[actual_transition].state           = &states[atoi(strtok(NULL, "\n"))];
+        states[state].transitions[actual_transition].read_character  = *strtok(NULL, " ");
+        states[state].transitions[actual_transition].write_character = *strtok(NULL, " ");
+        states[state].transitions[actual_transition].direction       = (*strtok(NULL, " ") == 'D')? right : left;
+        states[state].transitions[actual_transition].state           = &states[atoi(strtok(NULL, "\n")) - 1];
 
         printf("%s", transition);
     }
@@ -82,10 +80,10 @@ int main(int argc, char const *argv[]){
     fclose(fpointer);
 
     // Turing Machine Start =)
-    int accepted_state_index = num_states - 1;
-    turing_machine_t* machine = create_machine(words[0], states, states + accepted_state_index);
-    start_processing(machine);
-
+    int accepted_state_index  = num_states - 1;
+    turing_machine_t* machine = create_machine(words[0], states, &states[accepted_state_index]);
+    bool is_ok = start_processing(machine);
+    printf("%d: %s %sOK\n", 1, strtok(words[0], "\n"), is_ok? "" : 'not ');
 
     return 0;
 }

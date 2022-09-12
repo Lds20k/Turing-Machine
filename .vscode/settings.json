@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "transition.h": "c",
+        "graph.h": "c"
+    }
+}

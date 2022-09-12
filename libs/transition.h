@@ -27,12 +27,16 @@ typedef struct TRANSITION
 struct STATE
 {
     // Edge control
-    transition_t* transition;
-    int64_t transition_length;
+    transition_t* transitions;
+    uint64_t transitions_length;
 
+    uint64_t state_number;
+    
     // Content control
     bool* content;
     int64_t content_length;
 };
+
+transition_t* get_transition(const state_t* state, const char symbol);
 
 #endif
