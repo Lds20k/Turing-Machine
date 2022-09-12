@@ -8,7 +8,7 @@ typedef struct NODE node_t;
 typedef struct EDGE
 {
     // Where does it point
-    node_t* direction;
+    node_t* node;
 } edge_t;
 
 struct NODE

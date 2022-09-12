@@ -8,8 +8,14 @@
             "stopAtEntry": false,
             "externalConsole": false,
             "launchCompleteCommand": "exec-run",
-            "MIMode": "gdb",
-            "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "C:\\mingw64\\bin\\gdb.exe",
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
