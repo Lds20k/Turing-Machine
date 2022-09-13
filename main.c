@@ -64,6 +64,7 @@ int main(int argc, char const *argv[]){
         // printf("%s", transition);
     }
 
+
     char number_of_words[4]; 
     fgets(number_of_words, 4, fpointer);
     int num_words = atoi(number_of_words);
