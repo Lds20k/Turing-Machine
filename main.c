@@ -85,7 +85,11 @@ int main(int argc, char const *argv[]){
     turing_machine_t* machine = NULL;
 
     for(int i = 0; i < num_words; i++){
-        char tape[WORD_MAX_SIZE];
+        char * tape = malloc(sizeof(char) * WORD_MAX_SIZE);
+        if (tape == NULL) {
+            printf("Needs more memory");
+            exit(1);
+        }
         strcpy(tape, words[i]);
         if (machine == NULL){
             machine = create_machine(tape, states, &states[accepted_state_index]);

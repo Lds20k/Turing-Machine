@@ -47,7 +47,7 @@ node_t* move_tape_head(node_t** tape_head, direction_e direction){
 
 
 turing_machine_t* change_tape(turing_machine_t* machine, char* tape) {
-    // destruct_dl_list(machine->tape_head);
+    destruct_dl_list(machine->tape);
     machine->tape_head = NULL;
     machine->current_state = machine->initial_state;
 
