@@ -30,11 +30,11 @@ struct STATE
     transition_t* transitions;
     uint64_t transitions_length;
 
-    uint64_t state_number;
-    
     // Content control
-    bool* content;
+    void* content;
     int64_t content_length;
+
+    uint64_t state_number;
 };
 
 transition_t* get_transition(const state_t* state, const char symbol);

@@ -23,8 +23,30 @@
             ],
             "group": {
                 "kind": "build",
+                "isDefault": false
+            },
+        },
+        {
+            "label": "Valgrind memory lake",
+            "type": "shell",
+            "command": "valgrind",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "args": [
+                "--leak-check=full",
+                "--show-leak-kinds=all",
+                "--track-origins=yes",
+                "--verbose",
+                "--log-file=valgrind-out.txt",
+                "${workspaceFolder}/main.out"
+            ],
+            "group": {
+                "kind": "build",
                 "isDefault": true
             },
+            "dependsOn":["Compile C for gdb"]
         }
     ],
     "version": "2.0.0"

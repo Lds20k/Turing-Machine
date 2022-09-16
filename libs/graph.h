@@ -1,5 +1,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
+#include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -37,6 +38,6 @@ node_t* dl_list_add_node(const node_t* ancestor_or_descendant, const bool ancest
 /*
 destruct all nodes of the list
 */
-void destruct_dl_list(const node_t* root);
+void destroy_dl_list(node_t* root);
 
 #endif

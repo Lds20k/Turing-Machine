@@ -39,6 +39,11 @@ int main(int argc, char const *argv[]){
     // 2 (/n /0)
     // So 9 + 2 + 2
     state_t* states = malloc(num_states * sizeof(state_t));
+    if(states == NULL) {
+        return 1;
+    }
+    memset(states, 0, num_states * sizeof(state_t));
+
     for(int i = 0; i < num_transitions; i++){
         char transition[13];
         fgets(transition, 13, fpointer);
@@ -90,15 +95,20 @@ int main(int argc, char const *argv[]){
             printf("Needs more memory");
             exit(1);
         }
+
         strcpy(tape, words[i]);
         if (machine == NULL){
             machine = create_machine(tape, states, &states[accepted_state_index]);
         } else {
             change_tape(machine, tape);
         }
-        bool is_ok = start_processing(machine); 
+        bool is_ok = start_processing(machine);
+        free(tape);
+
         printf("%d: %s %sOK\n", i + 1, strtok(words[i], "\n"), is_ok? "" : "not ");
     }
+    
+    destroy_machine(machine, num_states);
 
     return 0;
 }

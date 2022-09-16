@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "transition.h": "c",
-        "graph.h": "c"
+        "graph.h": "c",
+        "stdint.h": "c"
     }
 }

@@ -20,8 +20,7 @@ edge_t* create_edges(node_t* node, const uint64_t quantity){
 
     edges = malloc(quantity * sizeof(edge_t));
     if(edges == NULL) return NULL;
-    for(uint64_t i = 0; i < quantity; i++)
-        edges[i].node = NULL;
+    memset(edges, 0, quantity * sizeof(edge_t));
     
     node->edges = edges;
     return edges;
@@ -31,11 +30,7 @@ node_t* create_node(){
     node_t* node = malloc(sizeof(node_t));
     if(node == NULL)
         return NULL;
-    
-    node->edges = NULL;
-    node->edges_length = 0;
-    node->content = NULL;
-    node->content_length = 0;
+    memset(node, 0, sizeof(node_t));
     return node;
 }
 
@@ -69,14 +64,33 @@ node_t* dl_list_add_node(const node_t* ancestor_or_descendant, const bool ancest
     return aux;
 }
 
-void destruct_dl_list(const node_t* root){
-    node_t* node = (node_t*)root;
+void destroy_dl_list_side(node_t* root, bool side){
+    node_t* node = root->edges[side].node;
     while (node != NULL)
     {   
-        node_t* aux = node->edges->node;
+        node_t* aux = node->edges[side].node;
+        node->content_length = 0;
+        node->edges_length = 0;
         free(node->content);
         free(node->edges);
         free(node);
         node = aux;
     }
+}
+
+void destroy_dl_list(node_t* root){
+    destroy_dl_list_side(root, 0);
+    destroy_dl_list_side(root, 1);
+    free(root->content);
+    free(root->edges);
+    free(root);
+
+    // while (node != NULL)
+    // {   
+    //     node_t* aux = node->edges->node;
+    //     free(node->content);
+    //     free(node->edges);
+    //     free(node);
+    //     node = aux;
+    // }
 }
